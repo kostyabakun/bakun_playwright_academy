@@ -1,14 +1,31 @@
-import { test } from "@playwright/test";
-import { LoginPage } from "../../src/pages/pmtool/login_page.ts";
-import { LostPasswordPage } from "../../src/pages/pmtool/lost_password_page.ts";
+import { Locator, Page } from "@playwright/test";
 
-test("Exercise: Lost Password POM", async ({ page }) => {
-  const loginPage = new LoginPage(page);
-  const lostPasswordPage = new LostPasswordPage(page);
+export class LostPasswordPage {
+  private readonly page: Page;
+  private readonly emailInput: Locator;
+  private readonly usernameInput: Locator;
+  private readonly sendButton: Locator;
 
-  await loginPage.open();
-  await loginPage.clickPasswordForgotten();
-  await lostPasswordPage.fillEmail("test@tredgate.cz");
-  await lostPasswordPage.fillUsername("test");
-  await lostPasswordPage.clickSend();
-});
+  constructor(page: Page) {
+    this.page = page;
+    this.emailInput = page.locator(
+      ":nth-child(3) > .input-icon > .form-control",
+    );
+    this.usernameInput = page.locator(
+      ":nth-child(2) > .input-icon > .form-control",
+    );
+    this.sendButton = page.locator(".btn-info");
+  }
+
+  async fillEmail(email: string) {
+    await this.emailInput.fill(email);
+  }
+
+  async fillUsername(username: string) {
+    await this.usernameInput.fill(username);
+  }
+
+  async clickSend() {
+    await this.sendButton.click();
+  }
+}
