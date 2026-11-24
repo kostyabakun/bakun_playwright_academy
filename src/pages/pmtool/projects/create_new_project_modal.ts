@@ -1,5 +1,5 @@
 import { Locator, Page } from "@playwright/test";
-import { ProjectTasksPage } from ".//project_tasks_page.ts";
+
 
 export class CreateNewProjectModal {
   readonly page: Page;

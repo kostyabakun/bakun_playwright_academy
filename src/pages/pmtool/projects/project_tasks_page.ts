@@ -1,5 +1,4 @@
-import { Locator, Page, expect, test } from "@playwright/test";
-import { LoginPage } from "../login_page.ts";
+
 
 export class ProjectTasksPage {
   readonly page: Page;
@@ -26,10 +25,6 @@ export class ProjectTasksPage {
   }
 
   async logout() {
-    await test.step("Logout", async () => {
-      await this.clickProfile();
-      await this.clickLogout();
-    });
 
     return new LoginPage(this.page);
   }
