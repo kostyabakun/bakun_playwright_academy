@@ -1,4 +1,4 @@
-import { expect, Locator, Page } from "@playwright/test";
+import { expect, Locator, Page, test } from "@playwright/test";
 import { LoginPage } from "./login_page.ts";
 import { ProjectsPage } from "./projects_page.ts";
 
@@ -7,7 +7,7 @@ export class DashboardPage {
   private readonly profileButton: Locator;
   private readonly logoutButton: Locator;
   private readonly notificationButton: Locator;
-  private readonly projectsButton;
+
 
   constructor(page: Page) {
     this.page = page;
@@ -15,6 +15,7 @@ export class DashboardPage {
     this.logoutButton = this.page.locator("#logout");
     this.notificationButton = this.page.locator("#user_notifications_report");
     this.projectsButton = this.page.locator("#Projects");
+
   }
 
   async clickProfile() {
@@ -29,8 +30,11 @@ export class DashboardPage {
   }
 
   async logout() {
-    await this.clickProfile();
-    await this.clickLogout();
+    await test.step("Logout", async () => {
+      await this.clickProfile();
+      await this.clickLogout();
+    });
+
     return new LoginPage(this.page);
   }
 
@@ -38,4 +42,5 @@ export class DashboardPage {
     await this.projectsButton.click();
     return new ProjectsPage(this.page);
   }
+<
 }
