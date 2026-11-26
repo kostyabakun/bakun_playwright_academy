@@ -8,14 +8,12 @@ export class DashboardPage {
   private readonly logoutButton: Locator;
   private readonly notificationButton: Locator;
 
-
   constructor(page: Page) {
     this.page = page;
     this.profileButton = this.page.locator("#user_dropdown");
     this.logoutButton = this.page.locator("#logout");
     this.notificationButton = this.page.locator("#user_notifications_report");
     this.projectsButton = this.page.locator("#Projects");
-
   }
 
   async clickProfile() {
@@ -42,5 +40,4 @@ export class DashboardPage {
     await this.projectsButton.click();
     return new ProjectsPage(this.page);
   }
-<
 }
